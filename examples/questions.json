@@ -1,0 +1,28 @@
+{
+  "charging_mode": {
+    "type": "choice",
+    "instructions": "Choose charging behavior using battery state of charge and available power. Use unknown when required inputs are missing.",
+    "criteria": {
+      "charge": "Battery is low and enough power is available",
+      "idle": "Battery charge is adequate or available power is insufficient",
+      "unknown": "Required inputs are missing"
+    }
+  },
+  "needs_charge": {
+    "type": "noul",
+    "instructions": "The battery needs charging.",
+    "criteria": {
+      "true": "Battery charge is low",
+      "false": "Battery has sufficient charge"
+    }
+  },
+  "urgency": {
+    "type": "score",
+    "instructions": "How urgent is intervention given the selected entity states?",
+    "criteria": [
+      "No intervention needed",
+      "Attention needed soon",
+      "Immediate attention needed"
+    ]
+  }
+}

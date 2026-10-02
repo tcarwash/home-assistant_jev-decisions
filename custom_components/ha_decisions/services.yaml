@@ -1,0 +1,12 @@
+ask:
+  name: Refresh decision
+  description: Refresh the selected decision sensors now. Omit entity_id to refresh every loaded decision sensor.
+  fields:
+    entity_id:
+      name: Decision sensors
+      description: Select one or more HA Decisions sensors. An invalid selection raises an error.
+      selector:
+        entity:
+          integration: ha_decisions
+          domain: sensor
+          multiple: true

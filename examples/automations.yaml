@@ -1,0 +1,42 @@
+# Replace the example sensor IDs with your own. These examples create notifications.
+- alias: Decision - charging recommendation
+  triggers:
+    - trigger: state
+      entity_id: sensor.charging_mode
+      to: charge
+  conditions:
+    - condition: template
+      value_template: "{{ state_attr('sensor.charging_mode', 'status') == 'complete' }}"
+  actions:
+    - action: persistent_notification.create
+      data:
+        title: Charging recommendation
+        message: The model recommends charging.
+
+- alias: Decision - probable charging need
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.needs_charge
+      above: 0.8
+  conditions:
+    - condition: template
+      value_template: "{{ state_attr('sensor.needs_charge', 'status') == 'complete' }}"
+  actions:
+    - action: persistent_notification.create
+      data:
+        title: Charging likely needed
+        message: The Noul result is above 80% probability true.
+
+- alias: Decision - high urgency
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.urgency
+      above: 1.5
+  conditions:
+    - condition: template
+      value_template: "{{ state_attr('sensor.urgency', 'status') == 'complete' }}"
+  actions:
+    - action: persistent_notification.create
+      data:
+        title: Attention needed
+        message: The score is above 1.5 on the configured three-level rubric.

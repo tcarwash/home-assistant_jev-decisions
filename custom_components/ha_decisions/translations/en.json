@@ -1,0 +1,207 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect your decision model",
+        "description": "Create a decision sensor using a local or remote model endpoint. If you have existing decision sensors, the most recently configured connection is prefilled, including its masked API key. Change or clear those fields to use a different connection. Configure the question and input entities in the next steps.",
+        "data": {
+          "name": "Sensor name",
+          "backend": "Backend protocol",
+          "api_url": "Complete endpoint URL",
+          "api_key": "API key (optional)",
+          "model": "Model name"
+        },
+        "data_description": {
+          "api_url": "Typed JSON: enter the complete /v1/systemone URL. Chat completions: enter the complete /v1/chat/completions URL. No path is appended.",
+          "model": "Use the model identifier accepted by your endpoint. For Laya typed-decisions, use typed-decisions."
+        }
+      },
+      "question_type": {
+        "title": "Build your question",
+        "description": "Choose a guided question type or edit the full question map. Guided editing replaces the question map with one question; use advanced editing to preserve multiple questions.",
+        "menu_options": {
+          "choice": "Choice — select a named option",
+          "noul": "Noul — probability a statement is true",
+          "score": "Score — rate against ordered levels",
+          "advanced": "Advanced — custom or multiple questions (JSON)"
+        }
+      },
+      "choice": {
+        "title": "Choice question",
+        "description": "Write the decision question. Enter 2–255 options, one per line: label: description. Labels become the sensor state, for example charge: Battery needs charging. A line without a colon uses the same text as label and description.",
+        "data": {
+          "question_key": "Question identifier",
+          "instructions": "Question / instructions",
+          "criteria": "Choice options (one label: description per line)"
+        }
+      },
+      "noul": {
+        "title": "Noul question",
+        "description": "Write a statement to evaluate, such as “The battery needs charging.” Add descriptions for true and false. The sensor reports probability true from 0 to 1; 0.8 means 80%. Noul is a probability, so use numeric thresholds in automations.",
+        "data": {
+          "question_key": "Question identifier",
+          "instructions": "Question / instructions",
+          "true_description": "Description when true",
+          "false_description": "Description when false"
+        }
+      },
+      "score": {
+        "title": "Score question",
+        "description": "Write what should be rated. Enter 2–10 distinct level descriptions, one per line, in order from lowest to highest. Levels are numbered from 0; three levels produce an expected score from 0 to 2.",
+        "data": {
+          "question_key": "Question identifier",
+          "instructions": "Question / instructions",
+          "criteria": "Ordered level descriptions (one per line)"
+        }
+      },
+      "advanced": {
+        "title": "Advanced questions",
+        "description": "Enter a named question map as JSON. All model-specific types and fields are preserved. Set a primary question to expose one answer as the sensor state.",
+        "data": {
+          "questions": "Named question map (JSON)",
+          "primary_question": "Primary question identifier (optional)"
+        },
+        "data_description": {
+          "primary_question": "For multiple questions, use this question as the sensor state. Leave blank for a completed state with all answers in attributes."
+        }
+      },
+      "behavior": {
+        "title": "Choose inputs and refresh behavior",
+        "description": "Select the Home Assistant entities your question needs. The sensor evaluates after startup and input changes when automatic evaluation is enabled.",
+        "data": {
+          "references": "Input entities",
+          "auto_update": "Evaluate at startup and when inputs change",
+          "debounce": "Wait after input changes (seconds)",
+          "scan_interval": "Periodic refresh (seconds; 0 disables)",
+          "timeout": "Request timeout (seconds)"
+        },
+        "data_description": {
+          "references": "Only these entities and their attributes are sent to your model. Select the inputs needed to answer the question.",
+          "auto_update": "Disable for manual-only evaluation via the Refresh decision action. This also disables periodic refresh."
+        }
+      }
+    },
+    "error": {
+      "invalid_name": "Enter a nonempty name or identifier.",
+      "invalid_url": "Enter an HTTP or HTTPS endpoint with a valid host and port. Embedded credentials and URL fragments are not supported.",
+      "invalid_model": "Enter a model identifier.",
+      "invalid_json": "Enter a nonempty JSON object of named questions, each with a type.",
+      "invalid_question": "The primary question must match an identifier in your question map.",
+      "invalid_instructions": "Enter a question and nonempty descriptions.",
+      "invalid_choices": "Enter 2–255 unique labels, each with a nonempty description.",
+      "invalid_score": "Enter 2–10 distinct, ordered level descriptions."
+    },
+    "abort": {
+      "already_configured": "A decision with this name already exists."
+    }
+  },
+  "options": {
+    "step": {
+      "connection": {
+        "title": "Edit connection",
+        "description": "Change this sensor’s name or model endpoint.",
+        "data": {
+          "name": "Sensor name",
+          "backend": "Backend protocol",
+          "api_url": "Complete endpoint URL",
+          "api_key": "API key (optional)",
+          "model": "Model name"
+        },
+        "data_description": {
+          "api_url": "Typed JSON: enter the complete /v1/systemone URL. Chat completions: enter the complete /v1/chat/completions URL. No path is appended.",
+          "model": "Use the model identifier accepted by your endpoint. For Laya typed-decisions, use typed-decisions."
+        }
+      },
+      "question_type": {
+        "title": "Build your question",
+        "description": "Choose a guided question type or edit the full question map. Guided editing replaces the question map with one question; use advanced editing to preserve multiple questions.",
+        "menu_options": {
+          "choice": "Choice — select a named option",
+          "noul": "Noul — probability a statement is true",
+          "score": "Score — rate against ordered levels",
+          "advanced": "Advanced — custom or multiple questions (JSON)"
+        }
+      },
+      "choice": {
+        "title": "Choice question",
+        "description": "Write the decision question. Enter 2–255 options, one per line: label: description. Labels become the sensor state, for example charge: Battery needs charging. A line without a colon uses the same text as label and description.",
+        "data": {
+          "question_key": "Question identifier",
+          "instructions": "Question / instructions",
+          "criteria": "Choice options (one label: description per line)"
+        }
+      },
+      "noul": {
+        "title": "Noul question",
+        "description": "Write a statement to evaluate, such as “The battery needs charging.” Add descriptions for true and false. The sensor reports probability true from 0 to 1; 0.8 means 80%. Noul is a probability, so use numeric thresholds in automations.",
+        "data": {
+          "question_key": "Question identifier",
+          "instructions": "Question / instructions",
+          "true_description": "Description when true",
+          "false_description": "Description when false"
+        }
+      },
+      "score": {
+        "title": "Score question",
+        "description": "Write what should be rated. Enter 2–10 distinct level descriptions, one per line, in order from lowest to highest. Levels are numbered from 0; three levels produce an expected score from 0 to 2.",
+        "data": {
+          "question_key": "Question identifier",
+          "instructions": "Question / instructions",
+          "criteria": "Ordered level descriptions (one per line)"
+        }
+      },
+      "advanced": {
+        "title": "Advanced questions",
+        "description": "Enter a named question map as JSON. All model-specific types and fields are preserved. Set a primary question to expose one answer as the sensor state.",
+        "data": {
+          "questions": "Named question map (JSON)",
+          "primary_question": "Primary question identifier (optional)"
+        },
+        "data_description": {
+          "primary_question": "For multiple questions, use this question as the sensor state. Leave blank for a completed state with all answers in attributes."
+        }
+      },
+      "behavior": {
+        "title": "Choose inputs and refresh behavior",
+        "description": "Select the Home Assistant entities your question needs. The sensor evaluates after startup and input changes when automatic evaluation is enabled.",
+        "data": {
+          "references": "Input entities",
+          "auto_update": "Evaluate at startup and when inputs change",
+          "debounce": "Wait after input changes (seconds)",
+          "scan_interval": "Periodic refresh (seconds; 0 disables)",
+          "timeout": "Request timeout (seconds)"
+        },
+        "data_description": {
+          "references": "Only these entities and their attributes are sent to your model. Select the inputs needed to answer the question.",
+          "auto_update": "Disable for manual-only evaluation via the Refresh decision action. This also disables periodic refresh."
+        }
+      },
+      "init": {
+        "title": "Configure decision sensor",
+        "menu_options": {
+          "connection": "Connection and sensor name",
+          "question_type": "Question builder / advanced JSON",
+          "behavior": "Input entities and refresh behavior"
+        }
+      }
+    },
+    "error": {
+      "invalid_name": "Enter a nonempty name or identifier.",
+      "invalid_url": "Enter an HTTP or HTTPS endpoint with a valid host and port. Embedded credentials and URL fragments are not supported.",
+      "invalid_model": "Enter a model identifier.",
+      "invalid_json": "Enter a nonempty JSON object of named questions, each with a type.",
+      "invalid_question": "The primary question must match an identifier in your question map.",
+      "invalid_instructions": "Enter a question and nonempty descriptions.",
+      "invalid_choices": "Enter 2–255 unique labels, each with a nonempty description.",
+      "invalid_score": "Enter 2–10 distinct, ordered level descriptions."
+    }
+  },
+  "selector": {
+    "backend": {
+      "options": {
+        "typed_json": "Typed decisions (Laya / Jev compatible)",
+        "openai_compatible": "OpenAI-compatible chat completions"
+      }
+    }
+  }
+}
